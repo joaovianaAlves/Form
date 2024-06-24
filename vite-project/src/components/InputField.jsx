@@ -1,21 +1,17 @@
-"use Client";
-import { useState } from "react";
+"use client";
 import "../index.css";
 
 // eslint-disable-next-line react/prop-types
-export default function InputField({ text, type, name, id }) {
-  const [value, setValue] = useState("");
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
+export default function InputField({ text, type, name, id, value, onChange }) {
   return type === "radio" ? (
     <div>
       <input
         type={type}
         id={id}
         name={name}
-        value={value}
-        onChange={handleChange}
+        value={id}
+        checked={value === id}
+        onChange={(e) => onChange(e.target.value)}
         className="hidden"
       />
       <label
@@ -35,8 +31,8 @@ export default function InputField({ text, type, name, id }) {
       <input
         type={type}
         className="border p-4 rounded-xl mb-2 outline-none bg-transparent text-[#E3FEF7]"
-        value={value}
-        onChange={handleChange}
+        value={value || ""}
+        onChange={(e) => onChange(e.target.value)}
       />
     </div>
   );
